@@ -18,6 +18,16 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  // init sequelize db access
+  config.sequelize = {
+    dialect: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    database: 'rsactl',
+    username: 'dev',
+    password: 'dev',
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
