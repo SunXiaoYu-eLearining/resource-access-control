@@ -3,11 +3,11 @@
 const { assert, app } = require('egg-mock/bootstrap');
 
 describe('test/app/controller/applications.test.js', () => {
-  describe('GET /applications', () => {
+  describe('GET /api/v1/applications', () => {
     it('should work', async () => {
       // 通过 factory-girl 快速创建 user 对象到数据库中
       await app.factory.createMany('applications', 3);
-      const res = await app.httpRequest().get('/applications?limit=2');
+      const res = await app.httpRequest().get('/api/v1/applications?limit=2');
       assert(res.status === 200);
       assert(res.body.length === 2);
       assert(res.body[0].application_name);

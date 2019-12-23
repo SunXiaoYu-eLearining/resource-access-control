@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1576999719997_8702';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'filter' ];
 
   // init sequelize db access
   config.sequelize = {

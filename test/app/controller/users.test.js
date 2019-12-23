@@ -2,17 +2,13 @@
 
 const { assert, app } = require('egg-mock/bootstrap');
 
-describe('test/app/controller/resources.test.js', () => {
-  describe('GET /api/v1/resources', () => {
+describe('test/app/controller/users.test.js', () => {
+  describe('GET /api/v1/users', () => {
     it('should work', async () => {
       // 通过 factory-girl 快速创建 user 对象到数据库中
-      await app.factory.createMany('resources', 3);
-      const res = await app.httpRequest().get('/api/v1/resources?limit=2');
+      await app.factory.createMany('users', 30);
+      const res = await app.httpRequest().get('/api/v1/users?limit=2');
       assert(res.status === 200);
-      assert(res.body.length === 2);
-      assert(res.body[0].application_id);
-      assert(res.body[0].resource_name);
-      assert(res.body[0].creator);
     });
   });
 

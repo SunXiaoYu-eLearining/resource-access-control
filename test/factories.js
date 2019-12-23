@@ -18,4 +18,10 @@ module.exports = app => {
     creator: 9284,
     administrator: 9284,
   });
+
+  factory.define('users', app.model.User, {
+    application_id: 12345,
+    user_name: factory.sequence('User.user_name', n => `USER-${n}`),
+    creator: 9284,
+  });
 };
