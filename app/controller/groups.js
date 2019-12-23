@@ -9,12 +9,12 @@ function toInt(str) {
   return parseInt(str, 10) || 0;
 }
 
-class ResourceController extends Controller {
+class GroupController extends Controller {
   async index() {
     const ctx = this.ctx;
     const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
-    ctx.body = await ctx.model.Resource.findAll(query);
+    ctx.body = await ctx.model.Group.findAll(query);
   }
 }
 
-module.exports = ResourceController;
+module.exports = GroupController;
