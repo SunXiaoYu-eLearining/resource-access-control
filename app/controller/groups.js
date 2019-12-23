@@ -20,15 +20,37 @@ class GroupController extends Controller {
 
   async create() {
     const ctx = this.ctx;
-    const { group_name } = ctx.request.body;
+    const { group_name, creator } = ctx.request.body;
     
-    const group = await ctx.model.Group.create({
-      application_id: ctx.app_id,
-      group_name: group_name,
+    const user = await ctx.model.User.findOne({
+      where: {
+        application_id: ctx.app_id,
+        user_name: creator,
+      }
     });
 
-    ctx.status = 201;
-    ctx.body = group
+    if(user){
+      const group = await ctx.model.Group.create({
+        application_id: ctx.app_id,
+        group_name: group_name,
+      });
+  
+      const member = await ctx.model.Member.create({
+        application_id: ctx.app_id,
+        group_id: group.id,
+        user_id: user.id,
+        role: 'admin',
+      })
+  
+      ctx.status = 201;
+      ctx.body = group
+    }else{
+      ctx.status = 422;
+      ctx.body = {
+        error: `creator ${creator} cannot be found`,
+      };
+    }
+    
   }
 }
 
