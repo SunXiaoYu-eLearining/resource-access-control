@@ -26,29 +26,10 @@ class UserController extends Controller {
   async create() {
     const ctx = this.ctx;
     const { username } = ctx.request.body;
-    
-    const user = await ctx.model.User.create({ 
-      application_id: ctx.app_id,
-      user_name: username,
-    });
-
-    const group = await ctx.model.Group.create({
-      application_id: ctx.app_id,
-      group_name: username,
-    });
-
-    const member = await ctx.model.Member.create({
-      application_id: ctx.app_id,
-      group_id: group.id,
-      user_id: user.id,
-      role: 'admin',
-    })
+    const result = ctx.service.UserService.createUser(username);
 
     ctx.status = 201;
-    ctx.body = {
-      user: user,
-      group: group
-    };
+    ctx.body = result;
   }
 
   async update() {

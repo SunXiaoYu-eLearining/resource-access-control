@@ -159,10 +159,8 @@ class ResourceController extends Controller {
                 permission_id: permissions[i].id,
                 resource_id: permissions[i].resource_id,
                 group_id: permissions[i].group_id,
-                // owner: PERMISSION_MAPPER[permissions[i].owner],
-                // group: PERMISSION_MAPPER[permissions[i].group],
-                // other: PERMISSION_MAPPER[permissions[i].other]
-            };
+            }
+
             if(resource.creator === user.id){
                 p.role = 'owner',
                 p.premission = PERMISSION_MAPPER[permissions[i].owner]
@@ -174,16 +172,14 @@ class ResourceController extends Controller {
                 p.premission = PERMISSION_MAPPER[permissions[i].other]
             }
             pms.push(p);
-        }
-
+        };
 
         ctx.body = {
             user_name: username,
             resource_name: resource_name,
             permission: pms,
         }
-        // const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
-        // ctx.body = await ctx.model.Resource.findAll(query);
+
     }
 }
 
